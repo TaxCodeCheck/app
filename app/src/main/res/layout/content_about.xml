@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/about"
             android:layout_margin="20sp"
             android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:textSize="15sp"
                     android:text="About the Developers"/>
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/sooz"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -54,7 +55,7 @@
                         android:text="@string/sooz_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
-                    <LinearLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -71,10 +72,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                    </LinearLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </LinearLayout>
-                <LinearLayout
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ahmed"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -91,7 +93,8 @@
                         android:text="hint hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
-                    <LinearLayout
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -108,13 +111,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
-                    </LinearLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </LinearLayout>
-
-
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </ScrollView>
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
