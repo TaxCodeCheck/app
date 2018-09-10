@@ -29,5 +29,5 @@
             android:text="No Results"
             android:textSize="50sp"
             android:visibility="gone"/>
-
+    
 </android.support.constraint.ConstraintLayout>
