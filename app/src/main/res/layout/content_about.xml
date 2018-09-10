@@ -8,4 +8,113 @@
     tools:context=".AboutActivity"
     tools:showIn="@layout/app_bar_about">
 
+    <TextView
+        android:id="@+id/aboutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="About the App"/>
+    <TextView
+        android:id="@+id/aboutInfo"
+        android:textSize="25sp"
+        android:text="@string/about_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/about"
+            android:layout_margin="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="About the Developers"/>
+
+                <LinearLayout
+                    android:id="@+id/sooz"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/sooz_image"
+                        android:src="@drawable/sooz"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/sooz_about"
+                        android:layout_weight="1"
+                        android:text="@string/sooz_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/githubSooz"
+                            android:layout_weight="1"
+                            android:text="GITHUB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/linkedinSooz"
+                            android:layout_weight="1"
+                            android:text="LINKEDIN"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ahmed"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/ahmed_image"
+                        android:src="@drawable/sooz"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/ahmed_about"
+                        android:layout_weight="1"
+                        android:text="hint hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/githubAhmed"
+                            android:layout_weight="1"
+                            android:text="GITHUB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <Button
+                            android:id="@+id/linkedinAhmed"
+                            android:layout_weight="1"
+                            android:text="LINKEDIN"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </ScrollView>
+        </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
