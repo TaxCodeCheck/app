@@ -32,17 +32,28 @@
         android:paddingBottom="10sp"
         app:layout_constraintTop_toBottomOf="@+id/aboutTitle"/>
 
-        <TextView
-            android:id="@+id/aboutDevs"
+    <TextView
+        android:id="@+id/aboutDevs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_margin="10sp"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:text="About the Developers"
+        app:layout_constraintTop_toBottomOf="@id/aboutInfo"/>
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/aboutDevs"
+        android:fillViewport="false"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_margin="10sp"
-            android:paddingTop="10sp"
-            android:paddingBottom="10sp"
-            android:text="About the Developers"
-            app:layout_constraintTop_toBottomOf="@id/aboutInfo"/>
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/sooz"
@@ -53,24 +64,18 @@
                 app:layout_constraintTop_toBottomOf="@id/aboutDevs">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:text="Suzanne Richman"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     />
-
-                <ImageView
-                    android:id="@+id/sooz_image"
-                    android:layout_width="240sp"
-                    android:layout_height="240sp"
-                    android:layout_weight="1"
-                    android:src="@drawable/sooz"
-                    android:textAlignment="viewStart" />
-
                 <TextView
                     android:id="@+id/sooz_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/sooz_about" />
+                    android:text="A full-stack developer, with Java, Android, JS and other skills." />
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
@@ -92,5 +97,51 @@
                         android:text="LINKEDIN" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ahmed"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                app:layout_constraintTop_toBottomOf="@id/aboutDevs">
+
+                <TextView
+                    android:text="Ahmed Ossan"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/ahmed_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="A full-stack developer, with Java, Android, JS and other skills." />
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ahmed">
+
+                    <Button
+                        android:id="@+id/githubAhmed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="GITHUB" />
+
+                    <Button
+                        android:id="@+id/linkedinAhmed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="LINKEDIN" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
