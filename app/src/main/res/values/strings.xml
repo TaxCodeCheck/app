@@ -11,4 +11,5 @@
     <string name="sooz_about">As a full-stack developer I’m keen to help make people’s lives easier. Combining my development skills with my history as a leader in marketing, allows me to offer organizations great experience driving results through team collaboration.</string>
     <string name="about_title">About this app and it\'s creators</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_confirmation">ConfirmationActivity</string>
 </resources>
