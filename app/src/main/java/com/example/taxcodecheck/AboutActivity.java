@@ -1,5 +1,6 @@
 package com.example.taxcodecheck;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
@@ -78,11 +79,16 @@ public class AboutActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.login) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
 
         } else if(id == R.id.search){
-
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
