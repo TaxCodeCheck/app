@@ -43,7 +43,7 @@
         android:id="@+id/searchButton"
         android:text="Search"
         android:textColor="@android:color/white"
-        android:background="@color/AvaTaxBlue"
+        android:backgroundTint="@color/AvalaraBlue"
         app:layout_constraintTop_toBottomOf="@+id/zipCode"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
