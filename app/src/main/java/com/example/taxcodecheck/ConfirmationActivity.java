@@ -81,7 +81,6 @@ public class ConfirmationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == R.id.login) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
