@@ -10,6 +10,7 @@
     <string name="about_app">Tax Code Check provides a fast way to look up tax rates by product and zip code from AvaTax.</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_confirmation">ConfirmationActivity</string>
+    <string name="not_logged_in">Not logged in</string>
     <string name="sooz_intro">As a full-stack developer I\'m keen to help make people\'s lives easier. Combining my development skills with my history as a leader in marketing, allows me to offer organizations great experience driving results through team collaboration.</string>
     <string name="sooz_name">Suzanne Richman</string>
     <string name="about_tax_title">About Tax Code Check</string>

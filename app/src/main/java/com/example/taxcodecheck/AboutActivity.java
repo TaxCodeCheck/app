@@ -13,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import static com.example.taxcodecheck.LoginActivity.isLoggedin;
 
 public class AboutActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -187,8 +190,15 @@ public class AboutActivity extends AppCompatActivity
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
 
-        } else if(id == R.id.search){
+        //Added conditional when clicking search for logged in vs not logged in
+        //needs to route back to login if user isn't logged in
+        } else if(id == R.id.search && isLoggedin == true){
             Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
+
+        } else if(id == R.id.search && isLoggedin == false){
+            Toast.makeText(this, "Please login", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
