@@ -12,4 +12,5 @@
     <string name="about_title">About this app and it\'s creators</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_confirmation">ConfirmationActivity</string>
+    <string name="not_logged_in">Not logged in</string>
 </resources>

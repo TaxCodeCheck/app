@@ -13,3 +13,7 @@ Navigation editing and icon creation [Android Developer Guide](https://developer
 [Avalara Developer Guide](https://developer.avalara.com/)
 
 Drawing a line in a view [StackOverflow](https://stackoverflow.com/questions/3616676/how-to-draw-a-line-in-android)
+
+Setting text on multiple navigation drawer views at one time [StackOverflow](https://stackoverflow.com/questions/34973456/how-to-change-text-of-a-textview-in-navigation-drawer-header)
+
+Shared preferences [Android Guide](https://developer.android.com/training/data-storage/shared-preferences)

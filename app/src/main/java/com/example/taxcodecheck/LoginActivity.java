@@ -1,8 +1,11 @@
 package com.example.taxcodecheck;
 
 
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -18,7 +21,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.preference.PreferenceManager;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +40,8 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public Boolean isLoggedin = false;
+    public static Boolean isLoggedin = false;
+    public static String usernameString = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +49,6 @@ public class LoginActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,8 +70,6 @@ public class LoginActivity extends AppCompatActivity
                 login(mUsername.getText().toString(), mPassword.getText().toString());
             }
         });
-
-
     }
 
     @Override
@@ -124,11 +119,16 @@ public class LoginActivity extends AppCompatActivity
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
 
-        } else if(id == R.id.search){
+        //Added conditional when clicking search for logged in vs not logged in
+        //needs to route back to login if user isn't logged in
+        } else if(id == R.id.search && isLoggedin == true){
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
-        }
 
+        } else if(id == R.id.search && isLoggedin == false){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -139,12 +139,14 @@ public class LoginActivity extends AppCompatActivity
 
         if (username == null || password == null) {
             Context context = getApplicationContext();
-            CharSequence text = "Please enter a username and password!";
-            int duration = Toast.LENGTH_SHORT;
+
+            CharSequence text = "Please enter a correct username and password";
+            int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         } else {
+            usernameString = username;
 
             // Instantiate the RequestQueue.
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -167,13 +169,19 @@ public class LoginActivity extends AppCompatActivity
                             Boolean isLoggedin = Boolean.parseBoolean(response.toString());
                             // Display the first 500 characters of the response string.
                             Context context = getApplicationContext();
-                            int duration = Toast.LENGTH_SHORT;
+                            int duration = Toast.LENGTH_LONG;
                             System.out.println(response.toString());
-                            Toast toast = Toast.makeText(context, response.toString(), duration);
+                            Toast toast = Toast.makeText(context, "you are now logged in", duration);
                             toast.show();
                             System.out.println(isLoggedin);
 
+                            //update nav drawer to show username when logged in
                             if(isLoggedin == true) {
+                                NavigationView navigationView = findViewById(R.id.nav_view);
+                                View headerView = navigationView.getHeaderView(0);
+                                TextView navUsername = headerView.findViewById(R.id.textView);
+                                Log.d("TEXT", navUsername.getText().toString());
+                                navUsername.setText("Logged in as: " + usernameString);
                                 goToSearch();
                             }
                         }
@@ -197,9 +205,12 @@ public class LoginActivity extends AppCompatActivity
         }
 
     }
+    
 
     public void goToSearch(){
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
+
+
 }
