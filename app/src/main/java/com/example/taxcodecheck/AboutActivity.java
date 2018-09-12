@@ -1,6 +1,7 @@
 package com.example.taxcodecheck;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,6 +45,102 @@ public class AboutActivity extends AppCompatActivity
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Link to each developer's external Github and LinkedIn profiles
+        final Button githubSooz = findViewById(R.id.githubSooz);
+        githubSooz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://github.com/FavoredFortune";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button linkedinSooz = findViewById(R.id.linkedinSooz);
+        linkedinSooz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://www.linkedin.com/in/suzannerichman/";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button githubAhmed = findViewById(R.id.githubAhmed);
+        githubAhmed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://github.com/AOhassan";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button linkedinAhmed = findViewById(R.id.linkedinAhmed);
+        linkedinAhmed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http:/www.linkedin.com/in/ahmedhosman/";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button githubTyler = findViewById(R.id.githubTyler);
+        githubTyler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://github.com/Tyler-Pearson/";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button linkedinTyler = findViewById(R.id.linkedinTyler);
+        linkedinTyler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://www.linkedin.com/in/tylerpearsonpnw/";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button githubTara = findViewById(R.id.githubTara);
+        githubTara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://github.com/tara-johnson";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        final Button linkedinTara = findViewById(R.id.linkedinTara);
+        linkedinTara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "http://www.linkedin.com/in/tarabjohnson";
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
 
     }
 
