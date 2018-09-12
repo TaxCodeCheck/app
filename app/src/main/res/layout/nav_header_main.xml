@@ -13,9 +13,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <!--commenting out for now-->
-    <!--currently no need for account switching-->
-    <!--keeping if user needs change-->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"

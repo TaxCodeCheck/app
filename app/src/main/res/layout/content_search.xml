@@ -7,6 +7,7 @@
     android:background="@color/AvaGrey3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20sp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SearchActivity"
     tools:showIn="@layout/app_bar_main">
@@ -42,7 +43,7 @@
         android:id="@+id/searchButton"
         android:text="Search"
         android:textColor="@android:color/white"
-        android:background="@color/AvaTaxBlue"
+        android:backgroundTint="@color/AvalaraBlue"
         app:layout_constraintTop_toBottomOf="@+id/zipCode"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
