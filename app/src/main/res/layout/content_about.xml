@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="About Tax Code Check"/>
+        android:text="@string/about_tax_title"/>
 
     <TextView
         android:id="@+id/aboutInfo"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="About the Developers"
+        android:text="@string/about_developers_title"
         android:paddingBottom="10sp"
         app:layout_constraintTop_toBottomOf="@id/line"
         app:layout_constraintBottom_toTopOf="@id/aboutDevs"/>
@@ -67,7 +67,7 @@
                 android:layout_marginBottom="15sp">
 
                 <TextView
-                    android:text="Suzanne Richman"
+                    android:text="@string/sooz_name"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="A full-stack developer, with Java, Android, JS and other skills."
+                    android:text="@string/sooz_intro"
                     android:layout_marginBottom="5sp"/>
 
                 <LinearLayout
@@ -111,7 +111,7 @@
                             android:id="@+id/githubSooz"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="GITHUB"
+                            android:text="@string/github"
                             android:textColor="@android:color/white"
                             android:backgroundTint="@color/AvalaraBlue"/>
 
@@ -120,7 +120,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/AvalaraBlue"
-                            android:text="LINKEDIN"
+                            android:text="@string/linkedin"
                             android:textColor="@android:color/white" />
 
                     </LinearLayout>
@@ -135,7 +135,7 @@
                 android:layout_marginBottom="15sp">
 
                 <TextView
-                    android:text="Ahmed Osman"
+                    android:text="@string/ahmed_name"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
@@ -145,7 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="A full-stack developer, with Java, Android, JS and other skills."
+                    android:text="@string/ahmed_intro"
                     android:layout_marginBottom="5sp"/>
 
                 <LinearLayout
@@ -179,7 +179,7 @@
                             android:id="@+id/githubAhmed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="GITHUB"
+                            android:text="@string/github"
                             android:textColor="@android:color/white"
                             android:backgroundTint="@color/AvalaraBlue"/>
 
@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/AvalaraBlue"
-                            android:text="LINKEDIN"
+                            android:text="@string/linkedin"
                             android:textColor="@android:color/white" />
 
                     </LinearLayout>
@@ -203,7 +203,7 @@
                 android:layout_marginBottom="15sp">
 
                 <TextView
-                    android:text="Tyler Pearson"
+                    android:text="@string/tyler_name"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
@@ -213,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="A full-stack developer, with Java, Android, JS and other skills."
+                    android:text="@string/tyler_intro"
                     android:layout_marginBottom="5sp"/>
 
                 <LinearLayout
@@ -247,7 +247,7 @@
                             android:id="@+id/githubTyler"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="GITHUB"
+                            android:text="@string/github"
                             android:textColor="@android:color/white"
                             android:backgroundTint="@color/AvalaraBlue"/>
 
@@ -256,7 +256,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/AvalaraBlue"
-                            android:text="LINKEDIN"
+                            android:text="@string/linkedin"
                             android:textColor="@android:color/white" />
 
                     </LinearLayout>
@@ -271,7 +271,7 @@
                 android:layout_marginBottom="15sp">
 
                 <TextView
-                    android:text="Tara Johnson"
+                    android:text="@string/tara_name"
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
@@ -281,7 +281,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="A full-stack developer, with Java, Android, JS and other skills."
+                    android:text="@string/tara_intro"
                     android:layout_marginBottom="5sp"/>
 
                 <LinearLayout
@@ -315,7 +315,7 @@
                             android:id="@+id/githubTara"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="GITHUB"
+                            android:text="@string/github"
                             android:textColor="@android:color/white"
                             android:backgroundTint="@color/AvalaraBlue"/>
 
@@ -324,7 +324,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/AvalaraBlue"
-                            android:text="LINKEDIN"
+                            android:text="@string/linkedin"
                             android:textColor="@android:color/white" />
 
                     </LinearLayout>
