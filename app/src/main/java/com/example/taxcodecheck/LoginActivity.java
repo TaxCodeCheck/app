@@ -77,7 +77,8 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
-    private void setPref() {
+    //sets user login status and username values to be shared across application
+    public void setPref() {
         Context ctx = getApplicationContext();
         PreferenceManager.getDefaultSharedPreferences(ctx)
                 .edit()
@@ -126,22 +127,6 @@ public class LoginActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -180,6 +165,9 @@ public class LoginActivity extends AppCompatActivity
         return true;
     }
 
+    //method that contacts our server to connect to AvaTax API for
+    //user authentication
+    //updates username value via SharedPreferences
     public void login(String username, String password){
 
         if (username == null || password == null) {
@@ -191,10 +179,11 @@ public class LoginActivity extends AppCompatActivity
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         } else {
+            //set values to be passed through Shared Preferences
             usernameString = username;
             isLoggedin = true;
 
-            // Instantiate the RequestQueue.
+            // Instantiate the RequestQueue
             RequestQueue queue = Volley.newRequestQueue(this);
 
             try {
@@ -205,58 +194,65 @@ public class LoginActivity extends AppCompatActivity
             }
 
             String url = "https://avatax-server.herokuapp.com/auth?username=" + username + "&password=" + password;
-            System.out.println(url);
-            // Request a string response from the provided URL.
+            Log.d("URL PASS", url);
+
+            //Request a string response from the provided URL
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            System.out.println("response: " + response.toString());
-                            Boolean isLoggedin = Boolean.parseBoolean(response.toString());
-                            // Display the first 500 characters of the response string.
-                            Context context = getApplicationContext();
-                            int duration = Toast.LENGTH_LONG;
-                            System.out.println(response.toString());
-                            Toast toast = Toast.makeText(context, "you are now logged in", duration);
-                            toast.show();
-                            System.out.println(isLoggedin);
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string
+                        Log.d("RESPONSE: ", response);
+                        boolean isLoggedin = Boolean.parseBoolean(response.toString());
 
-                            //update nav drawer to show username when logged in
-                            if(isLoggedin == true) {
-                                //capture the username to share with all activities through the application
-                                setPref();
+                        Context context = getApplicationContext();
 
-                                //gets saved user login string from Login page and share to this activity page
-                                //to update the nav bar with login string
-                                NavigationView navigationView = findViewById(R.id.nav_view);
-                                View headerView = navigationView.getHeaderView(0);
-                                TextView navUsername = headerView.findViewById(R.id.textView);
-                                Log.d("TEXT", navUsername.getText().toString());
-                                navUsername.setText("Logged in as: " + usernameString);
-                                navigationView.getMenu().findItem(R.id.login).setVisible(false);
-                                navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, "you are now logged in", duration);
+                        toast.show();
 
-                                goToSearch();
-                            } else {
-                                NavigationView navigationView = findViewById(R.id.nav_view);
-                                navigationView.getMenu().findItem(R.id.login).setVisible(true);
-                                navigationView.getMenu().findItem(R.id.logout).setVisible(false);
-                            }
+                        Log.d("AUTH STATUS", String.valueOf(isLoggedin));
+
+                        //update nav drawer to show username when logged in
+                        if(isLoggedin == true) {
+                            //capture the username to share with all activities through the application
+                            setPref();
+
+                            //gets saved user login string from Login page and share to this activity page
+                            //to update the nav bar with login string
+                            NavigationView navigationView = findViewById(R.id.nav_view);
+                            View headerView = navigationView.getHeaderView(0);
+                            TextView navUsername = headerView.findViewById(R.id.textView);
+
+                            //confirm that username is being passed back to be assigned to text view
+                            Log.d("TEXT", navUsername.getText().toString());
+
+                            navUsername.setText("Logged in as: " + usernameString);
+                            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+                            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+
+                            goToSearch();
+
+                        } else {
+                            NavigationView navigationView = findViewById(R.id.nav_view);
+                            navigationView.getMenu().findItem(R.id.login).setVisible(true);
+                            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
                         }
-                    }, new Response.ErrorListener() {
+                    }
+                }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("error: " + error.getMessage());
+
+                    Log.d("ERROR",error.getMessage());
 
                     Context context = getApplicationContext();
-                    int duration = Toast.LENGTH_SHORT;
-                    System.out.println(error.getMessage());
-                    Toast toast = Toast.makeText(context, error.getMessage(), duration);
+
+                    Toast toast = Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG);
                     toast.show();
                 }
             });
 
-            // Add the request to the RequestQueue.
+            // Add the request to the RequestQueue
             queue.add(stringRequest);
         }
     }
