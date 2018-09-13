@@ -27,15 +27,6 @@ public class AboutActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -44,6 +35,16 @@ public class AboutActivity extends AppCompatActivity
 
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (isLoggedin == false) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
+        }
+
+        if (isLoggedin == true) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        }
 
         // Link to each developer's external Github and LinkedIn profiles
         final Button githubSooz = findViewById(R.id.githubSooz);
@@ -183,6 +184,10 @@ public class AboutActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.login) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 

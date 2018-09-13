@@ -59,6 +59,16 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if (isLoggedin == false) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
+        }
+
+        if (isLoggedin == true) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        }
+
         final Button login = findViewById(R.id.loginButton);
         final EditText mUsername = findViewById(R.id.username);
         final EditText mPassword = findViewById(R.id.passwordInput);
@@ -112,6 +122,10 @@ public class LoginActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.login) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
@@ -198,19 +212,14 @@ public class LoginActivity extends AppCompatActivity
                 }
             });
 
-// Add the request to the RequestQueue.
+            // Add the request to the RequestQueue.
             queue.add(stringRequest);
 
-
         }
-
     }
-    
 
     public void goToSearch(){
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
-
-
 }

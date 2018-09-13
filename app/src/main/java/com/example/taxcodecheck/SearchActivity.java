@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import static com.example.taxcodecheck.LoginActivity.isLoggedin;
+
 public class SearchActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,15 +26,6 @@ public class SearchActivity extends AppCompatActivity
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,6 +34,16 @@ public class SearchActivity extends AppCompatActivity
 
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (isLoggedin == false) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
+        }
+
+        if (isLoggedin == true) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        }
     }
 
     @Override
@@ -85,6 +88,10 @@ public class SearchActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
         } else if (id == R.id.about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
@@ -93,7 +100,6 @@ public class SearchActivity extends AppCompatActivity
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
         }
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
