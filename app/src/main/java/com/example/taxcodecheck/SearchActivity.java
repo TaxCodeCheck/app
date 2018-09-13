@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
+import static com.example.taxcodecheck.LoginActivity.isLoggedin;
+
 public class SearchActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,6 +45,16 @@ public class SearchActivity extends AppCompatActivity
         getPref();
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (isLoggedin == false) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
+        }
+
+        if (isLoggedin == true) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        }
     }
 
     //gets saved user login string from Login page and share to this activity page
@@ -105,6 +117,10 @@ public class SearchActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
         } else if (id == R.id.about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
@@ -113,7 +129,6 @@ public class SearchActivity extends AppCompatActivity
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
         }
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

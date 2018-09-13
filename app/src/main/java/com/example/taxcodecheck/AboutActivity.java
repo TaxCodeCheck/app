@@ -45,6 +45,16 @@ public class AboutActivity extends AppCompatActivity
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if (isLoggedin == false) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
+        }
+
+        if (isLoggedin == true) {
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        }
+
         // Link to each developer's external Github and LinkedIn profiles
         final Button githubSooz = findViewById(R.id.githubSooz);
         githubSooz.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +211,10 @@ public class AboutActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.login) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
 
