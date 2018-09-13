@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,6 +24,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
 
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
@@ -48,6 +56,9 @@ public class SearchActivity extends AppCompatActivity
         if (isLoggedin) {
             getPref();
         }
+
+        taxcodes[] codes = loadJSONFromAsset(this);
+
     }
 
     //gets saved user login string from Login page and share to this activity page
@@ -90,21 +101,6 @@ public class SearchActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -136,4 +132,34 @@ public class SearchActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public taxcodes[] loadJSONFromAsset(Context context) {
+        String json = null;
+        taxcodes[] codes;
+        try {
+            InputStream is = context.getAssets().open("taxcodes.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            Gson gson = new Gson();
+            json = new String(buffer, "UTF-8");
+            JsonObject obj = gson.fromJson(json, JsonObject.class);
+            JsonArray value = obj.getAsJsonArray("value");
+            codes = gson.fromJson(value, taxcodes[].class);
+            Log.d("CODES", "" + codes.length);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return codes;
+
+    }
+
 }

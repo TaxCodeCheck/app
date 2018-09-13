@@ -23,4 +23,12 @@
     <string name="tyler_intro">A full-stack developer, with Java, Android, JS and other skills.</string>
     <string name="tara_name">Tara Johnson</string>
     <string name="tara_intro">A full-stack developer, with Java, Android, JS and other skills.</string>
+    <string name="sooz_github">http://github.com/FavoredFortune</string>
+    <string name="sooz_linkedin">http://www.linkedin.com/in/suzannerichman/</string>
+    <string name="ahmed_github">http://github.com/AOhassan</string>
+    <string name="ahmed_linkedin">http:/www.linkedin.com/in/ahmedhosman/</string>
+    <string name="tyler_github">http://github.com/Tyler-Pearson/</string>
+    <string name="tyler_linkedin">http://www.linkedin.com/in/tylerpearsonpnw/</string>
+    <string name="tara_github">http://github.com/tara-johnson</string>
+    <string name="tara_linkedin">http://www.linkedin.com/in/tarabjohnson</string>
 </resources>
