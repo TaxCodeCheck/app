@@ -21,9 +21,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -68,6 +70,17 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 login(mUsername.getText().toString(), mPassword.getText().toString());
+            }
+        });
+
+        mPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_DONE){
+                    login(mUsername.getText().toString(), mPassword.getText().toString());
+                    return true;
+                }
+                return false;
             }
         });
 
