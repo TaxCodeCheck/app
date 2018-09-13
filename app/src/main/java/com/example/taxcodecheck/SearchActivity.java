@@ -52,11 +52,15 @@ public class SearchActivity extends AppCompatActivity
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
         Log.d("PREF VALUE", prefVal);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUsername = headerView.findViewById(R.id.textView);
-        Log.d("TEXT", navUsername.getText().toString());
-        navUsername.setText("Logged in as: " + usernameString);
+        //conditional so that if user isn't logged in and sees about view
+        //correctly sees "not logged in"
+        if (prefVal != "Not logged in") {
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            TextView navUsername = headerView.findViewById(R.id.textView);
+            Log.d("TEXT", navUsername.getText().toString());
+            navUsername.setText("Logged in as: " + usernameString);
+        }
     }
 
     @Override
