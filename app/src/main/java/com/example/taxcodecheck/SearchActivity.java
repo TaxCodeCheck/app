@@ -1,6 +1,8 @@
 package com.example.taxcodecheck;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.navigation.NavigationView;
@@ -9,10 +11,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import static com.example.taxcodecheck.LoginActivity.usernameString;
 
 import static com.example.taxcodecheck.LoginActivity.isLoggedin;
 
@@ -32,6 +41,8 @@ public class SearchActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //passes user login info into the navigation bar
+        getPref();
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -43,6 +54,24 @@ public class SearchActivity extends AppCompatActivity
         if (isLoggedin == true) {
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
             navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        }
+    }
+
+    //gets saved user login string from Login page and share to this activity page
+    //to update the nav bar with login string
+    private void getPref() {
+        Context ctx = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
+        Log.d("PREF VALUE", prefVal);
+        //conditional so that if user isn't logged in and sees about view
+        //correctly sees "not logged in"
+        if (prefVal != "Not logged in") {
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            TextView navUsername = headerView.findViewById(R.id.textView);
+            Log.d("TEXT", navUsername.getText().toString());
+            navUsername.setText("Logged in as: " + usernameString);
         }
     }
 

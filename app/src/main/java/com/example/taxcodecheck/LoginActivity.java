@@ -1,8 +1,6 @@
 package com.example.taxcodecheck;
 
 
-import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,13 +32,14 @@ import android.widget.Toast;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static Boolean isLoggedin = false;
-    public static String usernameString = null;
+    public static String usernameString = "Not logged in";
+
+    public static final String PREF_USERNAME = "userString";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +53,14 @@ public class LoginActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        //passes user login info into the navigation bar
+        getPref();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Toast.makeText(this, "Please login to use this search tool", Toast.LENGTH_LONG).show();
+
+
 
         if (isLoggedin == false) {
             navigationView.getMenu().findItem(R.id.login).setVisible(true);
@@ -80,6 +83,34 @@ public class LoginActivity extends AppCompatActivity
                 login(mUsername.getText().toString(), mPassword.getText().toString());
             }
         });
+    }
+
+    private void setPref() {
+        Context ctx = getApplicationContext();
+        PreferenceManager.getDefaultSharedPreferences(ctx)
+                .edit()
+                .putString(PREF_USERNAME,usernameString)
+                .apply();
+    }
+
+
+    //gets saved user login string from Login page and share to this activity page
+    //to update the nav bar with login string
+    private void getPref() {
+        Context ctx = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
+        Log.d("PREF VALUE", prefVal);
+
+        //conditional so that if user isn't logged in and sees about view
+        //correctly sees "not logged in"
+        if (prefVal != "Not logged in") {
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            TextView navUsername = headerView.findViewById(R.id.textView);
+            Log.d("TEXT", navUsername.getText().toString());
+            navUsername.setText("Logged in as: " + usernameString);
+        }
     }
 
     @Override
@@ -191,11 +222,17 @@ public class LoginActivity extends AppCompatActivity
 
                             //update nav drawer to show username when logged in
                             if(isLoggedin == true) {
+                                //capture the username to share with all activities through the application
+                                setPref();
+
+                                //gets saved user login string from Login page and share to this activity page
+                                //to update the nav bar with login string
                                 NavigationView navigationView = findViewById(R.id.nav_view);
                                 View headerView = navigationView.getHeaderView(0);
                                 TextView navUsername = headerView.findViewById(R.id.textView);
                                 Log.d("TEXT", navUsername.getText().toString());
                                 navUsername.setText("Logged in as: " + usernameString);
+
                                 goToSearch();
                             }
                         }
@@ -214,7 +251,6 @@ public class LoginActivity extends AppCompatActivity
 
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
-
         }
     }
 
