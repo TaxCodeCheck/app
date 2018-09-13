@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import static com.example.taxcodecheck.LoginActivity.isLoggedin;
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
 public class ConfirmationActivity extends AppCompatActivity
@@ -47,10 +48,13 @@ public class ConfirmationActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //passes user login info into the navigation bar
-        getPref();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //passes user login info into the navigation bar
+        if (isLoggedin) {
+            getPref();
+        }
     }
 
     //gets saved user login string from Login page and share to this activity page
@@ -59,15 +63,20 @@ public class ConfirmationActivity extends AppCompatActivity
         Context ctx = getApplicationContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
+        boolean prefAuth = prefs.getBoolean(LoginActivity.PREF_AUTH_STATUS, isLoggedin);
         Log.d("PREF VALUE", prefVal);
+        Log.d("PREF AUTH", String.valueOf(prefAuth));
+
         //conditional so that if user isn't logged in and sees about view
         //correctly sees "not logged in"
-        if (prefVal != "Not logged in") {
+        if (prefAuth) {
             NavigationView navigationView = findViewById(R.id.nav_view);
             View headerView = navigationView.getHeaderView(0);
             TextView navUsername = headerView.findViewById(R.id.textView);
             Log.d("TEXT", navUsername.getText().toString());
             navUsername.setText("Logged in as: " + usernameString);
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
         }
     }
 
@@ -111,6 +120,14 @@ public class ConfirmationActivity extends AppCompatActivity
 
         if (id == R.id.login) {
             Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.logout) {
+            isLoggedin = false;
+            usernameString = "Not logged in";
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("authStatus", isLoggedin)
+                    .putExtra("username", usernameString);
             startActivity(intent);
 
         } else if (id == R.id.about) {
