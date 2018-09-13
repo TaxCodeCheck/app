@@ -27,7 +27,8 @@
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_menu_login"
-            android:title="Logout" />
+            android:title="Logout"
+            android:visible="false"/>
         <item
             android:id="@+id/search"
             android:icon="@drawable/ic_menu_search"

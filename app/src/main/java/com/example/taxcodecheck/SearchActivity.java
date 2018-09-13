@@ -41,19 +41,12 @@ public class SearchActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //passes user login info into the navigation bar
-        getPref();
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (isLoggedin == false) {
-            navigationView.getMenu().findItem(R.id.login).setVisible(true);
-            navigationView.getMenu().findItem(R.id.logout).setVisible(false);
-        }
-
-        if (isLoggedin == true) {
-            navigationView.getMenu().findItem(R.id.login).setVisible(false);
-            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
+        //passes user login info into the navigation bar
+        if (isLoggedin) {
+            getPref();
         }
     }
 
@@ -63,15 +56,20 @@ public class SearchActivity extends AppCompatActivity
         Context ctx = getApplicationContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
+        boolean prefAuth = prefs.getBoolean(LoginActivity.PREF_AUTH_STATUS, isLoggedin);
         Log.d("PREF VALUE", prefVal);
+        Log.d("PREF AUTH", String.valueOf(prefAuth));
+
         //conditional so that if user isn't logged in and sees about view
         //correctly sees "not logged in"
-        if (prefVal != "Not logged in") {
+        if (prefAuth) {
             NavigationView navigationView = findViewById(R.id.nav_view);
             View headerView = navigationView.getHeaderView(0);
             TextView navUsername = headerView.findViewById(R.id.textView);
             Log.d("TEXT", navUsername.getText().toString());
             navUsername.setText("Logged in as: " + usernameString);
+            navigationView.getMenu().findItem(R.id.login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.logout).setVisible(true);
         }
     }
 
@@ -118,7 +116,11 @@ public class SearchActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.logout) {
+            isLoggedin = false;
+            usernameString = "Not logged in";
             Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("authStatus", isLoggedin)
+                    .putExtra("username", usernameString);
             startActivity(intent);
 
         } else if (id == R.id.about) {
