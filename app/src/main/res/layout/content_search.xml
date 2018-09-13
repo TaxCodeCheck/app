@@ -36,7 +36,6 @@
             android:inputType="number"
             android:hint="Zip Code"/>
     </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,5 +60,4 @@
             android:textSize="50sp"
             android:visibility="visible"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
