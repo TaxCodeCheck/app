@@ -35,6 +35,10 @@ Shared preferences [Android Guide](https://developer.android.com/training/data-s
 Toast notifications and modifications [Android Guide](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 
 #Credits
+Dev team: Ahmed Ossan, Tara Johnson, Tyler Pearson, Suzanne Richman
+
 Code Fellows Instructional team: Steve Geluso, Casey Cady
+
+Classmates: Amy Cohen, Paul Suarez, Panos Kumasaka, Brandon Fenty, Nicklas DiPietro, Timothy Busch, Travis Williams
 
 Avalara AvaTax Clients: Ted Spence, Wayne Myer
