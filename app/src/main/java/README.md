@@ -17,3 +17,10 @@ Drawing a line in a view [StackOverflow](https://stackoverflow.com/questions/361
 Setting text on multiple navigation drawer views at one time [StackOverflow](https://stackoverflow.com/questions/34973456/how-to-change-text-of-a-textview-in-navigation-drawer-header)
 
 Shared preferences [Android Guide](https://developer.android.com/training/data-storage/shared-preferences)
+
+Toast notifications and modifications [Android Guide](https://developer.android.com/guide/topics/ui/notifiers/toasts)
+
+#Credits
+Code Fellows Instructional team: Steve Geluso, Casey Cady
+
+Avalara AvaTax Clients: Ted Spence, Wayne Myer

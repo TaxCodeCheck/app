@@ -21,15 +21,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 
@@ -57,7 +61,11 @@ public class LoginActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Toast.makeText(this, "Please login to use this search tool", Toast.LENGTH_LONG).show();
+
+        //conditional to prompt users to login on page, if not already logged in
+        if(!isLoggedin){
+            makeToast("Please login for \nfast tax code checks");
+        }
 
         final Button login = findViewById(R.id.loginButton);
         final EditText mUsername = findViewById(R.id.username);
@@ -108,6 +116,22 @@ public class LoginActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
             navigationView.getMenu().findItem(R.id.logout).setVisible(true);
         }
+    }
+
+    //generate login message to users
+    public void makeToast(String toastString){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.custom_toast_container));
+
+        TextView text = layout.findViewById(R.id.text);
+        text.setText(toastString);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, -400);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 
     @Override
@@ -169,19 +193,16 @@ public class LoginActivity extends AppCompatActivity
     //user authentication
     //updates username value via SharedPreferences
     public void login(String username, String password){
+        //set values to be passed through Shared Preferences
+        usernameString = username;
 
         if (username == null || password == null) {
-            Context context = getApplicationContext();
 
-            CharSequence text = "Please enter a correct username and password";
-            int duration = Toast.LENGTH_LONG;
+            makeToast("Please enter username and password \nto get started");
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
         } else {
-            //set values to be passed through Shared Preferences
+
             usernameString = username;
-            isLoggedin = true;
 
             // Instantiate the RequestQueue
             RequestQueue queue = Volley.newRequestQueue(this);
@@ -203,18 +224,20 @@ public class LoginActivity extends AppCompatActivity
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string
                         Log.d("RESPONSE: ", response);
-                        boolean isLoggedin = Boolean.parseBoolean(response.toString());
+                        boolean result = Boolean.parseBoolean(response.toString());
 
-                        Context context = getApplicationContext();
+                        if(result){
+                            isLoggedin = result;
+                            setPref();
+                        }
 
-                        int duration = Toast.LENGTH_LONG;
-                        Toast toast = Toast.makeText(context, "you are now logged in", duration);
-                        toast.show();
+                        makeToast("You are now logged in \nGoing to the search page now");
 
                         Log.d("AUTH STATUS", String.valueOf(isLoggedin));
 
                         //update nav drawer to show username when logged in
-                        if(isLoggedin == true) {
+                        if(isLoggedin) {
+
                             //capture the username to share with all activities through the application
                             setPref();
 
@@ -234,7 +257,14 @@ public class LoginActivity extends AppCompatActivity
                             goToSearch();
 
                         } else {
+
+                            //make sure shared pref reset to not be logged in
+                            isLoggedin = false;
+                            usernameString = "Not logged in";
+                            setPref();
+
                             NavigationView navigationView = findViewById(R.id.nav_view);
+                            makeToast("Login incorrect\n Please try again");
                             navigationView.getMenu().findItem(R.id.login).setVisible(true);
                             navigationView.getMenu().findItem(R.id.logout).setVisible(false);
                         }
