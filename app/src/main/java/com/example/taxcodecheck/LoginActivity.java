@@ -33,7 +33,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 
@@ -64,7 +63,7 @@ public class LoginActivity extends AppCompatActivity
 
         //conditional to prompt users to login on page, if not already logged in
         if(!isLoggedin){
-            makeToast("Please login for \nfast tax code checks");
+            makeToast("Please login for \ntax code checks");
         }
 
         final Button login = findViewById(R.id.loginButton);
@@ -164,6 +163,7 @@ public class LoginActivity extends AppCompatActivity
         } else if (id == R.id.logout) {
             isLoggedin = false;
             usernameString = "Not logged in";
+            makeToast("Logged out");
             Intent intent = new Intent(this, LoginActivity.class);
             intent.putExtra("authStatus", isLoggedin)
                     .putExtra("username", usernameString);
@@ -180,6 +180,7 @@ public class LoginActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if(id == R.id.search && isLoggedin == false){
+            makeToast("Please login to use search");
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
@@ -202,6 +203,7 @@ public class LoginActivity extends AppCompatActivity
 
         } else {
 
+            //setting variable for set Shared Preferences, if user login turns out to be valid
             usernameString = username;
 
             // Instantiate the RequestQueue
@@ -224,22 +226,18 @@ public class LoginActivity extends AppCompatActivity
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string
                         Log.d("RESPONSE: ", response);
-                        boolean result = Boolean.parseBoolean(response.toString());
+                        boolean authStatus = Boolean.parseBoolean(response.toString());
 
-                        if(result){
-                            isLoggedin = result;
-                            setPref();
-                        }
 
-                        makeToast("You are now logged in \nGoing to the search page now");
-
-                        Log.d("AUTH STATUS", String.valueOf(isLoggedin));
-
-                        //update nav drawer to show username when logged in
-                        if(isLoggedin) {
+                        if(authStatus){
 
                             //capture the username to share with all activities through the application
+                            isLoggedin = authStatus;
                             setPref();
+
+                            makeToast("You are now logged in \nGoing to search now");
+                            Log.d("AUTH STATUS", String.valueOf(isLoggedin));
+
 
                             //gets saved user login string from Login page and share to this activity page
                             //to update the nav bar with login string
@@ -264,7 +262,7 @@ public class LoginActivity extends AppCompatActivity
                             setPref();
 
                             NavigationView navigationView = findViewById(R.id.nav_view);
-                            makeToast("Login incorrect\n Please try again");
+                            makeToast("Login incorrect\nPlease try again");
                             navigationView.getMenu().findItem(R.id.login).setVisible(true);
                             navigationView.getMenu().findItem(R.id.logout).setVisible(false);
                         }
@@ -274,11 +272,8 @@ public class LoginActivity extends AppCompatActivity
                 public void onErrorResponse(VolleyError error) {
 
                     Log.d("ERROR",error.getMessage());
+                    makeToast(error.getMessage());
 
-                    Context context = getApplicationContext();
-
-                    Toast toast = Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG);
-                    toast.show();
                 }
             });
 
