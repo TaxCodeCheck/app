@@ -97,7 +97,6 @@ public class SearchActivity extends AppCompatActivity
             taxCodeArray[i] = codes[i].taxCode;
         }
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, descArray);
         AutoCompleteTextView textView =
