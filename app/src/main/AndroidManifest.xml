@@ -13,7 +13,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name"
+            android:label="Avalara Sales"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="TaxCodeCheck"
+            android:label="Avalara Sales"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:label="TaxCodeCheck"
+            android:label="Avalara Sales"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".ConfirmationActivity"
-            android:label="TaxCodeCheck"
+            android:label="Avalara Sales"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

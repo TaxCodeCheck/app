@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -18,12 +20,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,9 +65,48 @@ public class SearchActivity extends AppCompatActivity
             getPref();
         }
 
-        taxcodes[] codes = loadJSONFromAsset(this);
+
+            //search button to communicate with Server - incomplete
+            //Sooz
+//            final Button search = findViewById(R.id.searchButton);
+//            search.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    search(isLoggedin);
+//                }
+//            });
+//
+//            makeToast("Query sent to AvaTax, " + usernameString);
+
 
     }
+    
+            taxcodes[] codes = loadJSONFromAsset(this);
+
+
+      //shell of search method by Sooz with toast message for users when query sent
+//    public void search (boolean isLoggedin, String itemCode, String postalCode){
+//        if (!isLoggedin){
+//            makeToast("Whoops, looks like you need to login again");
+//        } else {
+//            RequestQueue queue = Volley.newRequestQueue(this);
+//
+//            try {
+//                itemCode = URLEncoder.encode(itemCode, "UTF-8");
+//                postalCode = URLEncoder.encode(postalCode, "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//
+//            //String URL currently incorrect and incomplete
+//            String url = "https://avatax-server.herokuapp.com/" + itemCode + postalCode;
+//            Log.d("URL PASS", url);
+//
+//            //request response and parse response to add value to page
+//
+//
+//        }
+//    }
 
     //gets saved user login string from Login page and share to this activity page
     //to update the nav bar with login string
@@ -82,6 +129,22 @@ public class SearchActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.login).setVisible(false);
             navigationView.getMenu().findItem(R.id.logout).setVisible(true);
         }
+    }
+
+    //generate login message to users
+    public void makeToast(String toastString){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.custom_toast_container));
+
+        TextView text = layout.findViewById(R.id.text);
+        text.setText(toastString);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, -400);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 
     @Override
