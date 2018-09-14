@@ -5,7 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
@@ -25,17 +31,28 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup;
+
+
+
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.URLEncoder;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
@@ -44,12 +61,23 @@ import static com.example.taxcodecheck.LoginActivity.isLoggedin;
 public class SearchActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    public taxcodes[] codes;
+    public String[] descArray;
+    public String[] taxCodeArray;
+    public TextView taxView;
+    public static String taxResult;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+         codes = loadJSONFromAsset(this);
+         taxView = findViewById(R.id.taxRate);
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -66,6 +94,24 @@ public class SearchActivity extends AppCompatActivity
         }
 
 
+        descArray = new String[codes.length];
+        for(int i = 0; i < codes.length; i++){
+            descArray[i] = codes[i].description;
+        }
+
+        taxCodeArray = new String[codes.length];
+        for(int i = 0; i < codes.length; i++){
+            taxCodeArray[i] = codes[i].taxCode;
+        }
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, descArray);
+        AutoCompleteTextView textView =
+                findViewById(R.id.filterInput);
+        textView.setAdapter(adapter);
+
+
             //search button to communicate with Server - incomplete
             //Sooz
 //            final Button search = findViewById(R.id.searchButton);
@@ -79,6 +125,24 @@ public class SearchActivity extends AppCompatActivity
 //            makeToast("Query sent to AvaTax, " + usernameString);
 
 
+
+        Button search = findViewById(R.id.searchButton);
+        final EditText zipInput = findViewById(R.id.zipInput);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String taxCodeBoi = grabTaxCode();
+                System.out.println(taxCodeBoi);
+                String zipCodeBoi = zipInput.getText().toString();
+                System.out.println(zipCodeBoi);
+                searchTaxCode(taxCodeBoi, zipCodeBoi);
+
+
+                renderTax(taxResult);
+
+            }
+        });
     }
     
             taxcodes[] codes = loadJSONFromAsset(this);
@@ -220,9 +284,65 @@ public class SearchActivity extends AppCompatActivity
             ex.printStackTrace();
             return null;
         }
-
         return codes;
-
     }
 
-}
+    public String grabTaxCode(){
+        AutoCompleteTextView searchInput = findViewById(R.id.filterInput);
+        String searchParam = searchInput.getText().toString();
+        String result = "";
+
+        for(int i = 0; i < codes.length ; i++){
+            if(searchParam.equals(descArray[i])) {
+                result = taxCodeArray[i];
+                return result;
+            }
+        }
+        return result;
+    }
+
+    public void searchTaxCode(String taxCode, String zip) {
+            // Instantiate the RequestQueue
+            RequestQueue queue = Volley.newRequestQueue(this);
+            String url = "https://avatax-server.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip;
+            Log.d("URL PASS", url);
+
+            //Request a string response from the provided URL
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the first 500 characters of the response string
+                            Log.d("RESPONSE: ", response);
+
+
+                            taxResult = response.toString();
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Context context = getApplicationContext();
+
+                    Toast toast = Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            });
+
+            // Add the request to the RequestQueue
+            queue.add(stringRequest);
+
+        }
+
+        public  void renderTax(String tax){
+//            Double num = Double.parseDouble(tax);
+//            num *= 100;
+//            String percentage = num.toString() + "%";
+            taxView.setText(tax);
+        }
+
+
+        }
+
+

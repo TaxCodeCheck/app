@@ -283,8 +283,8 @@ public class LoginActivity extends AppCompatActivity
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
-                    Log.d("ERROR",error.getMessage());
-                    makeToast(error.getMessage());
+
+
 
                 }
             });
