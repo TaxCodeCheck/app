@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/login"
+            android:icon="@drawable/ic_menu_login"
+            android:title="Login" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_menu_login"
+            android:title="Logout"
+            android:visible="false"/>
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_menu_search"
+            android:title="Search" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_menu_about"
+            android:title="About" />
+    </group>
+</menu>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ConfirmationActivity"
+    android:layout_margin="10sp"
+    tools:showIn="@layout/app_bar_confirmation">
+
+    <TextView
+        android:id="@+id/confirmationHeader"
+        android:text="Query Confirmation"
+        android:textSize="25sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/line"
+        app:layout_constraintTop_toBottomOf="@+id/confirmationHeader"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="3sp"
+        android:background="@color/AvaGrey4Alt3" />
+
+    <LinearLayout
+        android:id="@+id/confirmationForm"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/companyID"
+            android:hint="Company ID"
+            app:layout_constraintTop_toBottomOf="@id/confirmationForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
+
+        <EditText
+            android:id="@+id/requestDate"
+            android:hint="Request Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/totalAmount"
+            android:hint="Total Amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/description"
+            android:hint="Item Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/itemCode"
+            android:hint="Item Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/taxCode"
+            android:hint="Tax Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/postalCode"
+            android:hint="Postal Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/totalTaxRate"
+            android:hint="Total Tax Rate Amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

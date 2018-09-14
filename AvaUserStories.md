@@ -1,11 +1,11 @@
-Clifford Turner use case
+#Clifford Turner use case
 
-Epic
+##Epic
 As Clifford Turner, a great salesperson and consultant with an Android phone (and websites)
 I want an app I can use to
 so I can show taxability
 
-Story
+##Stories
 - Login screen w/un and pw
 - Incorporating the SDK (add Avalara SDK) and set up connection
 - Display screen / taxability + rate
@@ -13,7 +13,7 @@ Story
 - Box for postal code
 - Execute transaction via AvaTax / Has to be a sales order. You don’t want to accidentally file taxes.
 
-Stretch Goals
+##Stretch Goals
 - Company selector
 - Create a new demo company button / might want to see the nexus rules in every location
 - Type ahead auto-complete / would be great to have things “filter” by what user is typing

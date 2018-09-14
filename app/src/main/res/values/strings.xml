@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">TaxCodeCheck</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">AvaTax</string>
+    <string name="nav_header_subtitle">Logged in as: </string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="about_app">Tax Code Check provides a fast way to look up tax rates by product and zip code from AvaTax.</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_confirmation">ConfirmationActivity</string>
+    <string name="not_logged_in">Not logged in</string>
+    <string name="sooz_intro">A full stack software developer keen to help others, Suzanne has a record of delivering projects that delight clients and exceed their expectations. </string>
+    <string name="sooz_name">Suzanne Richman</string>
+    <string name="about_tax_title">About Tax Code Check</string>
+    <string name="about_developers_title">About the Developers</string>
+    <string name="github">GITHUB</string>
+    <string name="linkedin">LINKEDIN</string>
+    <string name="ahmed_name">Ahmed Osman</string>
+    <string name="ahmed_intro">Ahmed has a strong background in mathematics and passion for problem solving.This passion has lead him to life as a developer, bringing solutions to life.</string>
+    <string name="tyler_name">Tyler Pearson</string>
+    <string name="tyler_intro">Tyler is a software developer born and raised in seattle with a long time passion for tech. He is an avid gamer and blockchain enthusiast.</string>
+    <string name="tara_name">Tara Johnson</string>
+    <string name="tara_intro">Tara is a software developer who takes a user-centered approach to problem solving. Her visual and interaction design talents only further enhance those solutions.</string>
+    <string name="sooz_github">http://github.com/FavoredFortune</string>
+    <string name="sooz_linkedin">http://www.linkedin.com/in/suzannerichman/</string>
+    <string name="ahmed_github">http://github.com/AOhassan</string>
+    <string name="ahmed_linkedin">http:/www.linkedin.com/in/ahmedhosman/</string>
+    <string name="tyler_github">http://github.com/Tyler-Pearson/</string>
+    <string name="tyler_linkedin">http://www.linkedin.com/in/tylerpearsonpnw/</string>
+    <string name="tara_github">http://github.com/tara-johnson</string>
+    <string name="tara_linkedin">http://www.linkedin.com/in/tarabjohnson</string>
+    <string name="ava_tax_check">AvaTax Quick Tax Check</string>
+</resources>

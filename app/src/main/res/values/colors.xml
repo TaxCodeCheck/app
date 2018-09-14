@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="AvalaraOrange">#ff6d00</color>
+    <color name="DarkOrange">#e65000</color>
+    <color name="AvalaraBlue">#059bd2</color>
+    <color name="DarkBlue">#0587be</color>
+    <color name="AvaTaxBlue">#027fad</color>
+    <color name="LightBlue">#e4eff6</color>
+    <color name="AvaGrey1">#5f6062</color>
+    <color name="AvaGrey2">#919195</color>
+    <color name="AvaGrey3">#eaeaea</color>
+    <color name="AvaGrey4">#f5f6fa</color>
+    <color name= "AvaGrey4Alt3">#e7e7e7</color>
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search"
+    android:background="@color/AvaGrey3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20sp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".SearchActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/productSearch"
+        android:paddingTop="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/filterInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
+            android:hint="Product description"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/zipCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/productSearch">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/zipInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Zip Code"
+            android:imeOptions="actionDone"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchButton"
+        android:text="Search"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/AvalaraBlue"
+        app:layout_constraintTop_toBottomOf="@+id/zipCode"/>
+
+    <LinearLayout
+        android:id="@+id/taxRateResults"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        app:layout_constraintTop_toBottomOf="@id/searchButton">
+        <TextView
+            android:id="@+id/taxRateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total tax rate:"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:visibility="visible"/>
+        <TextView
+            android:id="@+id/taxRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="50sp"
+            android:textAlignment="center"
+            android:visibility="visible"/>
+    </LinearLayout>
+  
+</androidx.constraintlayout.widget.ConstraintLayout>
