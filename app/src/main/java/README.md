@@ -20,6 +20,8 @@ Shared preferences [Android Guide](https://developer.android.com/training/data-s
 
 Toast notifications and modifications [Android Guide](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 
+Setting visibility of search results [iServeAndroid Blog](http://iserveandroid.blogspot.com/2010/10/dynamic-layout-changes-with-visibility.html)
+
 #Credits
 Code Fellows Instructional team: Steve Geluso, Casey Cady
 

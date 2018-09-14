@@ -32,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -72,6 +73,7 @@ public class SearchActivity extends AppCompatActivity
         codes = loadJSONFromAsset(this);
         taxView = findViewById(R.id.taxRate);
 
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -96,7 +98,6 @@ public class SearchActivity extends AppCompatActivity
             taxCodeArray[i] = codes[i].taxCode;
         }
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, descArray);
         AutoCompleteTextView textView =
@@ -114,6 +115,12 @@ public class SearchActivity extends AppCompatActivity
                 zipCodeBoi = zipInput.getText().toString();
                 System.out.println(zipCodeBoi);
                 searchTaxCode(taxCodeBoi, zipCodeBoi);
+
+                //improve user experience by hiding tax rate text between searches
+                TextView rate = findViewById(R.id.taxRate);
+                rate.setVisibility(View.GONE);
+                TextView rateTitle = findViewById(R.id.taxRateTitle);
+                rateTitle.setVisibility(View.GONE);
             }
         });
 
@@ -124,6 +131,9 @@ public class SearchActivity extends AppCompatActivity
                     taxCodeBoi = grabTaxCode();
                     zipCodeBoi = zipInput.getText().toString();
                     searchTaxCode(taxCodeBoi, zipCodeBoi);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(zipInput.getWindowToken(),
+                            InputMethodManager.RESULT_UNCHANGED_SHOWN);
                     return true;
                 }
                 return false;
@@ -280,7 +290,8 @@ public class SearchActivity extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                makeToast(error.getMessage());
+                String onErrorResponse = "" + error.getMessage();
+                Log.d("Error Message", onErrorResponse);
             }
         });
 
@@ -291,5 +302,11 @@ public class SearchActivity extends AppCompatActivity
     //shows tax result in the search view
     public void renderTax(String tax) {
         taxView.setText(tax);
+
+        //improve user experience by hiding tax rate text between searches
+        TextView rate = findViewById(R.id.taxRate);
+        rate.setVisibility(View.VISIBLE);
+        TextView rateTitle = findViewById(R.id.taxRateTitle);
+        rateTitle.setVisibility(View.VISIBLE);
     }
 }
