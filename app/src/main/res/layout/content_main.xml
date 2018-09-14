@@ -48,7 +48,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/passwordInput"
             android:hint="Password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

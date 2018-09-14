@@ -8,6 +8,10 @@ import android.os.Bundle;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -28,6 +32,10 @@ import android.widget.Toast;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
 
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
@@ -57,6 +65,7 @@ public class SearchActivity extends AppCompatActivity
             getPref();
         }
 
+
             //search button to communicate with Server - incomplete
             //Sooz
 //            final Button search = findViewById(R.id.searchButton);
@@ -69,7 +78,11 @@ public class SearchActivity extends AppCompatActivity
 //
 //            makeToast("Query sent to AvaTax, " + usernameString);
 
+
     }
+    
+            taxcodes[] codes = loadJSONFromAsset(this);
+
 
       //shell of search method by Sooz with toast message for users when query sent
 //    public void search (boolean isLoggedin, String itemCode, String postalCode){
@@ -182,4 +195,34 @@ public class SearchActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public taxcodes[] loadJSONFromAsset(Context context) {
+        String json = null;
+        taxcodes[] codes;
+        try {
+            InputStream is = context.getAssets().open("taxcodes.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            Gson gson = new Gson();
+            json = new String(buffer, "UTF-8");
+            JsonObject obj = gson.fromJson(json, JsonObject.class);
+            JsonArray value = obj.getAsJsonArray("value");
+            codes = gson.fromJson(value, taxcodes[].class);
+            Log.d("CODES", "" + codes.length);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+        return codes;
+
+    }
+
 }
