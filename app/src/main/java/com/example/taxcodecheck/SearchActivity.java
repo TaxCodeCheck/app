@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,20 +38,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.ViewGroup;
 
-
-
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.net.URLEncoder;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
@@ -73,19 +60,19 @@ public class SearchActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         codes = loadJSONFromAsset(this);
-         taxView = findViewById(R.id.taxRate);
+        codes = loadJSONFromAsset(this);
+        taxView = findViewById(R.id.taxRate);
 
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //passes user login info into the navigation bar
@@ -93,14 +80,13 @@ public class SearchActivity extends AppCompatActivity
             getPref();
         }
 
-
         descArray = new String[codes.length];
-        for(int i = 0; i < codes.length; i++){
+        for (int i = 0; i < codes.length; i++) {
             descArray[i] = codes[i].description;
         }
 
         taxCodeArray = new String[codes.length];
-        for(int i = 0; i < codes.length; i++){
+        for (int i = 0; i < codes.length; i++) {
             taxCodeArray[i] = codes[i].taxCode;
         }
 
@@ -110,21 +96,6 @@ public class SearchActivity extends AppCompatActivity
         AutoCompleteTextView textView =
                 findViewById(R.id.filterInput);
         textView.setAdapter(adapter);
-
-
-            //search button to communicate with Server - incomplete
-            //Sooz
-//            final Button search = findViewById(R.id.searchButton);
-//            search.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    search(isLoggedin);
-//                }
-//            });
-//
-//            makeToast("Query sent to AvaTax, " + usernameString);
-
-
 
         Button search = findViewById(R.id.searchButton);
         final EditText zipInput = findViewById(R.id.zipInput);
@@ -137,40 +108,11 @@ public class SearchActivity extends AppCompatActivity
                 String zipCodeBoi = zipInput.getText().toString();
                 System.out.println(zipCodeBoi);
                 searchTaxCode(taxCodeBoi, zipCodeBoi);
-
-
+                makeToast("Query received");
                 renderTax(taxResult);
-
             }
         });
     }
-    
-            taxcodes[] codes = loadJSONFromAsset(this);
-
-
-      //shell of search method by Sooz with toast message for users when query sent
-//    public void search (boolean isLoggedin, String itemCode, String postalCode){
-//        if (!isLoggedin){
-//            makeToast("Whoops, looks like you need to login again");
-//        } else {
-//            RequestQueue queue = Volley.newRequestQueue(this);
-//
-//            try {
-//                itemCode = URLEncoder.encode(itemCode, "UTF-8");
-//                postalCode = URLEncoder.encode(postalCode, "UTF-8");
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
-//
-//            //String URL currently incorrect and incomplete
-//            String url = "https://avatax-server.herokuapp.com/" + itemCode + postalCode;
-//            Log.d("URL PASS", url);
-//
-//            //request response and parse response to add value to page
-//
-//
-//        }
-//    }
 
     //gets saved user login string from Login page and share to this activity page
     //to update the nav bar with login string
@@ -196,7 +138,7 @@ public class SearchActivity extends AppCompatActivity
     }
 
     //generate login message to users
-    public void makeToast(String toastString){
+    public void makeToast(String toastString) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.custom_toast_container));
@@ -213,7 +155,7 @@ public class SearchActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -250,7 +192,7 @@ public class SearchActivity extends AppCompatActivity
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
 
-        } else if(id == R.id.search){
+        } else if (id == R.id.search) {
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
         }
@@ -262,7 +204,6 @@ public class SearchActivity extends AppCompatActivity
 
     public taxcodes[] loadJSONFromAsset(Context context) {
         String json = null;
-        taxcodes[] codes;
         try {
             InputStream is = context.getAssets().open("taxcodes.json");
 
@@ -287,13 +228,13 @@ public class SearchActivity extends AppCompatActivity
         return codes;
     }
 
-    public String grabTaxCode(){
+    public String grabTaxCode() {
         AutoCompleteTextView searchInput = findViewById(R.id.filterInput);
         String searchParam = searchInput.getText().toString();
         String result = "";
 
-        for(int i = 0; i < codes.length ; i++){
-            if(searchParam.equals(descArray[i])) {
+        for (int i = 0; i < codes.length; i++) {
+            if (searchParam.equals(descArray[i])) {
                 result = taxCodeArray[i];
                 return result;
             }
@@ -302,47 +243,33 @@ public class SearchActivity extends AppCompatActivity
     }
 
     public void searchTaxCode(String taxCode, String zip) {
-            // Instantiate the RequestQueue
-            RequestQueue queue = Volley.newRequestQueue(this);
-            String url = "https://avatax-server.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip;
-            Log.d("URL PASS", url);
+        // Instantiate the RequestQueue
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://avatax-server.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip;
+        Log.d("URL PASS", url);
 
-            //Request a string response from the provided URL
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Display the first 500 characters of the response string
-                            Log.d("RESPONSE: ", response);
+        //Request a string response from the provided URL
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string
+                        Log.d("RESPONSE: ", response);
+                        taxResult = response.toString();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                makeToast(error.getMessage());
+            }
+        });
 
+        // Add the request to the RequestQueue
+        queue.add(stringRequest);
+    }
 
-                            taxResult = response.toString();
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                    Context context = getApplicationContext();
-
-                    Toast toast = Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            });
-
-            // Add the request to the RequestQueue
-            queue.add(stringRequest);
-
-        }
-
-        public  void renderTax(String tax){
-//            Double num = Double.parseDouble(tax);
-//            num *= 100;
-//            String percentage = num.toString() + "%";
-            taxView.setText(tax);
-        }
-
-
-        }
-
-
+    //shows tax result in the search view
+    public void renderTax(String tax) {
+        taxView.setText(tax);
+    }
+}
