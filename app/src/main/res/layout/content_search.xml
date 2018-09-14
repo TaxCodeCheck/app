@@ -18,9 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/filterInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
             android:hint="Product description"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -31,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/productSearch">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/zipInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -64,7 +67,7 @@
             android:id="@+id/taxRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="10.1%"
+            android:text=""
             android:textStyle="bold"
             android:textSize="50sp"
             android:textAlignment="center"

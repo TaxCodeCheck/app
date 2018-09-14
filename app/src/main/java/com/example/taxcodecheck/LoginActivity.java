@@ -256,7 +256,7 @@ public class LoginActivity extends AppCompatActivity
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
-                    Log.d("ERROR",error.getMessage());
+//                    Log.d("ERROR",error.getMessage());
 
                     Context context = getApplicationContext();
 
