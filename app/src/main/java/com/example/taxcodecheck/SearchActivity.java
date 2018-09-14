@@ -72,6 +72,7 @@ public class SearchActivity extends AppCompatActivity
         codes = loadJSONFromAsset(this);
         taxView = findViewById(R.id.taxRate);
 
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -96,7 +97,6 @@ public class SearchActivity extends AppCompatActivity
             taxCodeArray[i] = codes[i].taxCode;
         }
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, descArray);
         AutoCompleteTextView textView =
@@ -114,6 +114,12 @@ public class SearchActivity extends AppCompatActivity
                 zipCodeBoi = zipInput.getText().toString();
                 System.out.println(zipCodeBoi);
                 searchTaxCode(taxCodeBoi, zipCodeBoi);
+                
+                TextView rate = findViewById(R.id.taxRate);
+                rate.setVisibility(View.GONE);
+
+                TextView rateTitle = findViewById(R.id.taxRateTitle);
+                rateTitle.setVisibility(View.GONE);
             }
         });
 
@@ -291,5 +297,10 @@ public class SearchActivity extends AppCompatActivity
     //shows tax result in the search view
     public void renderTax(String tax) {
         taxView.setText(tax);
+        TextView rate = findViewById(R.id.taxRate);
+        rate.setVisibility(View.VISIBLE);
+
+        TextView rateTitle = findViewById(R.id.taxRateTitle);
+        rateTitle.setVisibility(View.VISIBLE);
     }
 }
