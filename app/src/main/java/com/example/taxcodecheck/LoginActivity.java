@@ -23,11 +23,13 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -240,7 +242,6 @@ public class LoginActivity extends AppCompatActivity
                         Log.d("RESPONSE: ", response);
                         boolean authStatus = Boolean.parseBoolean(response.toString());
 
-
                         if(authStatus){
 
                             //capture the username to share with all activities through the application
@@ -282,9 +283,6 @@ public class LoginActivity extends AppCompatActivity
                 }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
-
-
 
                 }
             });
