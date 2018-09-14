@@ -115,9 +115,9 @@ public class SearchActivity extends AppCompatActivity
                 System.out.println(zipCodeBoi);
                 searchTaxCode(taxCodeBoi, zipCodeBoi);
 
+                //improve user experience by hiding tax rate text between searches
                 TextView rate = findViewById(R.id.taxRate);
                 rate.setVisibility(View.GONE);
-
                 TextView rateTitle = findViewById(R.id.taxRateTitle);
                 rateTitle.setVisibility(View.GONE);
             }
@@ -297,9 +297,10 @@ public class SearchActivity extends AppCompatActivity
     //shows tax result in the search view
     public void renderTax(String tax) {
         taxView.setText(tax);
+
+        //improve user experience by hiding tax rate text between searches
         TextView rate = findViewById(R.id.taxRate);
         rate.setVisibility(View.VISIBLE);
-
         TextView rateTitle = findViewById(R.id.taxRateTitle);
         rateTitle.setVisibility(View.VISIBLE);
     }
