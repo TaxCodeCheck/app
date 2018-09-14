@@ -37,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Zip Code"/>
+            android:hint="Zip Code"
+            android:imeOptions="actionDone"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:layout_width="match_parent"

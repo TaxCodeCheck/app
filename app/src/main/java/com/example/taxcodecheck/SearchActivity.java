@@ -26,10 +26,12 @@ import androidx.appcompat.widget.Toolbar;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -54,6 +56,9 @@ public class SearchActivity extends AppCompatActivity
     public String[] taxCodeArray;
     public TextView taxView;
     public static String taxResult;
+    public EditText zipInput;
+    public String taxCodeBoi;
+    public String zipCodeBoi;
 
 
     @Override
@@ -98,18 +103,29 @@ public class SearchActivity extends AppCompatActivity
         textView.setAdapter(adapter);
 
         Button search = findViewById(R.id.searchButton);
-        final EditText zipInput = findViewById(R.id.zipInput);
+        zipInput = findViewById(R.id.zipInput);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String taxCodeBoi = grabTaxCode();
+                taxCodeBoi = grabTaxCode();
                 System.out.println(taxCodeBoi);
-                String zipCodeBoi = zipInput.getText().toString();
+                zipCodeBoi = zipInput.getText().toString();
                 System.out.println(zipCodeBoi);
                 searchTaxCode(taxCodeBoi, zipCodeBoi);
-                makeToast("Query received");
-                renderTax(taxResult);
+            }
+        });
+
+        zipInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_DONE){
+                    taxCodeBoi = grabTaxCode();
+                    zipCodeBoi = zipInput.getText().toString();
+                    searchTaxCode(taxCodeBoi, zipCodeBoi);
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -256,6 +272,7 @@ public class SearchActivity extends AppCompatActivity
                         // Display the first 500 characters of the response string
                         Log.d("RESPONSE: ", response);
                         taxResult = response.toString();
+                        renderTax(taxResult);
                     }
                 }, new Response.ErrorListener() {
             @Override
