@@ -114,7 +114,7 @@ public class SearchActivity extends AppCompatActivity
                 zipCodeBoi = zipInput.getText().toString();
                 System.out.println(zipCodeBoi);
                 searchTaxCode(taxCodeBoi, zipCodeBoi);
-                
+
                 TextView rate = findViewById(R.id.taxRate);
                 rate.setVisibility(View.GONE);
 
