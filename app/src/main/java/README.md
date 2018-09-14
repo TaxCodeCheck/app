@@ -10,7 +10,7 @@ Icon packs [Material.io](https://material.io/tools/icons/?style=baseline)
 
 Navigation editing and icon creation [Android Developer Guide](https://developer.android.com/studio/write/image-asset-studio)
 
-[Avalara Developer Guide](https://developer.avalara.com/)
+Avalara Developer Guide [Avalara Developer Guide](https://developer.avalara.com/)
 
 Drawing a line in a view [StackOverflow](https://stackoverflow.com/questions/3616676/how-to-draw-a-line-in-android)
 
@@ -20,7 +20,10 @@ Shared preferences [Android Guide](https://developer.android.com/training/data-s
 
 Toast notifications and modifications [Android Guide](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 
+Hide virtual keyboard after button press [StackOverflow] (https://stackoverflow.com/questions/3400028/close-virtual-keyboard-on-button-press)
+
 Setting visibility of search results [iServeAndroid Blog](http://iserveandroid.blogspot.com/2010/10/dynamic-layout-changes-with-visibility.html)
+
 
 #Credits
 Code Fellows Instructional team: Steve Geluso, Casey Cady
