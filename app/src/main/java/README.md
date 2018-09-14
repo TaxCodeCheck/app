@@ -22,6 +22,9 @@ Toast notifications and modifications [Android Guide](https://developer.android.
 
 Hide virtual keyboard after button press [StackOverflow] (https://stackoverflow.com/questions/3400028/close-virtual-keyboard-on-button-press)
 
+Setting visibility of search results [iServeAndroid Blog](http://iserveandroid.blogspot.com/2010/10/dynamic-layout-changes-with-visibility.html)
+
+
 #Credits
 Code Fellows Instructional team: Steve Geluso, Casey Cady
 
