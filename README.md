@@ -34,6 +34,8 @@ Shared preferences [Android Guide](https://developer.android.com/training/data-s
 
 Toast notifications and modifications [Android Guide](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 
+For auto complete [Android Guide](https://developer.android.com/reference/android/widget/AutoCompleteTextView)
+
 #Credits
 Dev team: Ahmed Ossan, Tara Johnson, Tyler Pearson, Suzanne Richman
 
