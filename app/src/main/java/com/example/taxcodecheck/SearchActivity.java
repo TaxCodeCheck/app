@@ -32,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -124,6 +125,9 @@ public class SearchActivity extends AppCompatActivity
                     taxCodeBoi = grabTaxCode();
                     zipCodeBoi = zipInput.getText().toString();
                     searchTaxCode(taxCodeBoi, zipCodeBoi);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(zipInput.getWindowToken(),
+                            InputMethodManager.RESULT_UNCHANGED_SHOWN);
                     return true;
                 }
                 return false;
@@ -280,7 +284,8 @@ public class SearchActivity extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                makeToast(error.getMessage());
+                String onErrorResponse = "" + error.getMessage();
+                Log.d("Error Message", onErrorResponse);
             }
         });
 
