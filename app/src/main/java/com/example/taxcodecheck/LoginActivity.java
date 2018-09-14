@@ -44,9 +44,13 @@ public class LoginActivity extends AppCompatActivity
 
     public static boolean isLoggedin = false;
     public static String usernameString = "Not logged in";
+    public static String authorization = null;
+
 
     public static final String PREF_USERNAME = "userString";
     public static final String PREF_AUTH_STATUS = "authStatus";
+    public static final String PREF_PASSWORD = "password";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +109,7 @@ public class LoginActivity extends AppCompatActivity
                 .edit()
                 .putString(PREF_USERNAME,usernameString)
                 .putBoolean(PREF_AUTH_STATUS, isLoggedin)
+                .putString(PREF_PASSWORD, authorization)
                 .apply();
     }
 
@@ -115,8 +120,10 @@ public class LoginActivity extends AppCompatActivity
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
         boolean prefAuth = prefs.getBoolean(LoginActivity.PREF_AUTH_STATUS, isLoggedin);
+        String prefPwd = prefs.getString(LoginActivity.PREF_PASSWORD, authorization);
         Log.d("PREF VALUE", prefVal);
         Log.d("PREF AUTH", String.valueOf(prefAuth));
+        Log.d("PREF PWD", prefPwd);
 
         //conditional so that if user isn't logged in and sees about view
         //correctly sees "not logged in"
@@ -210,6 +217,7 @@ public class LoginActivity extends AppCompatActivity
     public void login(String username, String password){
         //set values to be passed through Shared Preferences
         usernameString = username;
+        authorization = password;
 
         if (username == null || password == null) {
 
@@ -272,6 +280,7 @@ public class LoginActivity extends AppCompatActivity
                             //make sure shared pref reset to not be logged in
                             isLoggedin = false;
                             usernameString = "Not logged in";
+                            authorization = null;
                             setPref();
 
                             NavigationView navigationView = findViewById(R.id.nav_view);

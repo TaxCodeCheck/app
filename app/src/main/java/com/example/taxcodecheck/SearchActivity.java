@@ -41,6 +41,7 @@ import android.view.ViewGroup;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.example.taxcodecheck.LoginActivity.authorization;
 import static com.example.taxcodecheck.LoginActivity.usernameString;
 
 import static com.example.taxcodecheck.LoginActivity.isLoggedin;
@@ -121,8 +122,10 @@ public class SearchActivity extends AppCompatActivity
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String prefVal = prefs.getString(LoginActivity.PREF_USERNAME, usernameString);
         boolean prefAuth = prefs.getBoolean(LoginActivity.PREF_AUTH_STATUS, isLoggedin);
+        String prefPwd = prefs.getString(LoginActivity.PREF_PASSWORD, authorization);
         Log.d("PREF VALUE", prefVal);
         Log.d("PREF AUTH", String.valueOf(prefAuth));
+        Log.d("PREF PWD", prefPwd);
 
         //conditional so that if user isn't logged in and sees about view
         //correctly sees "not logged in"
@@ -245,7 +248,7 @@ public class SearchActivity extends AppCompatActivity
     public void searchTaxCode(String taxCode, String zip) {
         // Instantiate the RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://avatax-server.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip;
+        String url = "https://avatax-server.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip + "&username=" + usernameString + "&password=" + authorization ;
         Log.d("URL PASS", url);
 
         //Request a string response from the provided URL
