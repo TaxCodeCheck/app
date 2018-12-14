@@ -292,6 +292,8 @@ public class LoginActivity extends AppCompatActivity
                 }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    makeToast(error.getMessage());
+                    makeToast("You are not an authorized user");
 
                 }
             });
