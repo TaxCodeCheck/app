@@ -238,7 +238,7 @@ public class LoginActivity extends AppCompatActivity
                 e.printStackTrace();
             }
 
-            String url = "https://avatax-server.herokuapp.com/auth?username=" + username + "&password=" + password;
+            String url = "https://ava-tax-springmvc.herokuapp.com/auth?username=" + username + "&password=" + password;
             Log.d("URL PASS", url);
 
             //Request a string response from the provided URL

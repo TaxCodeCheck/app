@@ -264,7 +264,7 @@ public class SearchActivity extends AppCompatActivity
     public void searchTaxCode(String taxCode, String zip) {
         // Instantiate the RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://avatax-server.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip + "&username=" + usernameString + "&password=" + authorization ;
+        String url = "https://ava-tax-springmvc.herokuapp.com/transaction?taxcode=" + taxCode + "&zip=" + zip + "&username=" + usernameString + "&password=" + authorization ;
         Log.d("URL PASS", url);
 
         //Request a string response from the provided URL
@@ -280,7 +280,9 @@ public class SearchActivity extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                makeToast(error.getMessage());
+//                Log.d("ERROR: ", error.getMessage());
+                makeToast("AvaTax server unable to reach data services");
+                makeToast("Also known as, gremlins ate your homework");
             }
         });
 
